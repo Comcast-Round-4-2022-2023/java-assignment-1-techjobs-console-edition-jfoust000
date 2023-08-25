@@ -77,9 +77,9 @@ public class JobData {
 
         for (HashMap<String, String> row : allJobs) {
 
-            String aValue = row.get(column);
+            String aValue = row.get(column).toLowerCase();
 
-            if (aValue.contains(value)) {
+            if (aValue.contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
@@ -99,7 +99,79 @@ public class JobData {
         loadData();
 
         // TODO - implement this method
-        return null;
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        boolean matchFound = false;
+
+        for (HashMap<String, String> row : allJobs) {
+
+           for (String key : row.keySet()) {
+
+               if (key.equals("position type") && row.get(key).toLowerCase().contains(value.toLowerCase())) {
+
+                   matchFound = true;
+                   jobs.add(row);
+
+               } else if (key.equals("name") && row.get(key).toLowerCase().contains(value.toLowerCase())) {
+
+                   if (matchFound) {
+
+                       break;
+
+                   } else {
+
+                       matchFound = true;
+                       jobs.add(row);
+
+                   }
+
+               } else if (key.equals("employer") && row.get(key).toLowerCase().contains(value.toLowerCase())) {
+
+                   if (matchFound) {
+
+                       break;
+
+                   } else {
+
+                       matchFound = true;
+                       jobs.add(row);
+
+                   }
+
+               } else if (key.equals("location") && row.get(key).toLowerCase().contains(value.toLowerCase())) {
+
+                   if (matchFound) {
+
+                       break;
+
+                   } else {
+
+                       matchFound = true;
+                       jobs.add(row);
+
+                   }
+               } else if (key.equals("core competency") && row.get(key).toLowerCase().contains(value.toLowerCase())) {
+
+                   if (matchFound) {
+
+                       break;
+
+                   } else {
+
+                       matchFound = true;
+                       jobs.add(row);
+
+                   }
+
+               }
+
+           }
+
+           matchFound = false;
+
+        }
+
+        return jobs;
+
     }
 
     /**
